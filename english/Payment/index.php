@@ -3,6 +3,9 @@ $conn = mysql_connect("localhost","root","");
 mysql_select_db("english");
 $sql = "select * from payments";
 $query = mysql_query($sql);
+if (isset($_POST['search'])){
+    $query = mysql_query("select * from payments where payment_date = '".$_POST['tim']."'");
+}
 ?>
     <!DOCTYPE html>
     <html lang="vi">
@@ -102,6 +105,14 @@ $query = mysql_query($sql);
                 </div>
                 <div class="col-sm-9">
                     <h3>Danh sách giao dịch</h3>
+                    <form action="index.php" class="form-inline" method="POST">
+                        <div class="form-group">
+                            <input name="tim" type="text" class="form-control" placeholder="Ngày giao dịch">
+                        </div>
+                        <div class="form-group">
+                            <button name="search" type="submit" class="btn btn-primary">Tìm</button>
+                        </div>
+                    </form>
                     <table class="table table-striped">
                         <thead>
                         <tr>
